@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Your Image</title>
+</head>
+<body style="text-align: center;">
+	<h1>Your User Type</h1>
+	<p>You are type {{ profile.user_type }}</p>
+
+	{% if is_pdf %}
+	    <object data="{% static media_path %}" type="application/pdf" style="width: 100%; max-width: 700px; height: 80vh;">
+	        <p><a href="{% static media_path %}">Open the file</a></p>
+	    </object>
+	{% else %}
+	    <img src="{% static media_path %}" alt="User type {{ profile.user_type }}" style="max-width: 360px; width: 100%; height: auto;">
+	{% endif %}
+
+	<p style="margin-top: 16px;"><a href="{% url 'logout' %}">Log out</a></p>
+</body>
+</html>
