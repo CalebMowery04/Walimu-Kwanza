@@ -1,19 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sign Up - Walimu Kwanza</title>
+    {% load static %}
+    <style>
+        :root{ --navy:#002d62; --accent:#0a58ca; --muted:#6b7280 }
+        html,body{height:100%;margin:0;font-family:Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;background:#f4f7fb}
+        .topbar{background:var(--navy);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:12px}
+        .topbar img{height:36px;width:36px;object-fit:contain}
+        .topbar .title{font-weight:600;font-size:20px;letter-spacing:0.2px}
+
+        .container{min-height:calc(100% - 60px);display:flex;align-items:center;justify-content:center;padding:36px}
+        .card{background:#fff;border-radius:14px;box-shadow:0 8px 24px rgba(16,24,40,0.08);max-width:420px;width:100%;padding:28px;text-align:center}
+        .card .logo{height:170px;width:170px;object-fit:contain;margin:0 auto 12px}
+        .card h2{margin:0 0 8px;font-size:20px;color:#0f1724}
+        .card p.lead{margin:0 0 20px;color:var(--muted)}
+
+        form{display:flex;flex-direction:column;gap:12px}
+        .form-input{display:flex;flex-direction:column;text-align:left}
+        label{font-size:13px;color:#374151;margin-bottom:6px}
+        input[type=text], input[type=email], input[type=password]{padding:12px 14px;border:1px solid #e6e9ef;border-radius:8px;font-size:15px}
+        input:focus{outline:none;box-shadow:0 0 0 4px rgba(0,45,98,0.08);border-color:var(--navy)}
+
+        .btn{background:var(--navy);color:#fff;padding:12px;border-radius:10px;border:none;font-weight:600;cursor:pointer;font-size:15px}
+        /* center and size submit button; use .submit-btn on the form button */
+        .submit-btn{width:30%;display:block;margin:12px auto 0}
+        @media (max-width:480px){.submit-btn{width:60%}}
+        .muted-link{color:#6b7280;font-size:14px}
+        .muted-link a{color:var(--navy);text-decoration:none;font-weight:600}
+
+        @media (max-width:480px){.card{padding:20px;margin:0 12px}}
+    </style>
 </head>
 <body>
-    <h1>Create an Account</h1>
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <div class="topbar">
+        <img src="{% static 'users/images/WK Logo.png' %}" alt="WK Logo">
+        <div class="title">Walimu Kwanza</div>
+    </div>
 
-        <button type="submit">Sign Up</button>
-    </form>
-    <p style="margin-top: 16px;">
-        Already have an account? <a href="/login/">Log in</a>
-    </p>
+    <div class="container">
+        <div class="card">
+            <img class="logo" src="{% static 'users/images/WK Logo.png' %}" alt="WK Logo">
+            <h2 style="font-size:30px">Welcome to Walimu Kwanza!</h2>
+            <p class="lead" style="font-size:18px">Create your account to get started.</p>
+
+            <form method="POST" novalidate>
+                {% csrf_token %}
+
+                <div class="form-input">
+                    <label for="id_username">Username</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div style="color:#b91c1c;font-size:13px">{{ form.username.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-input">
+                    <label for="id_email">Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div style="color:#b91c1c;font-size:13px">{{ form.email.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-input">
+                    <label for="id_password1">Password</label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <div style="color:#b91c1c;font-size:13px">{{ form.password1.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-input">
+                    <label for="id_password2">Confirm password</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <div style="color:#b91c1c;font-size:13px">{{ form.password2.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <button class="btn submit-btn" type="submit">Sign up</button>
+            </form>
+
+            <p style="margin-top:14px" class="muted-link">Already have an account? <a href="{% url 'login' %}">Sign in.</a></p>
+        </div>
+    </div>
+
 </body>
 </html>

@@ -21,7 +21,8 @@ from users.views import home, image_page, logout_view, signup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    # make the signup view the site root so the signup page is the first page shown
+    path('', signup, name='home'),
     path('signup/', signup, name='signup'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', logout_view, name='logout'),
