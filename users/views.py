@@ -6,7 +6,7 @@ from .forms import SignUpForm
 from .models import Profile
 
 USER_TYPE_MEDIA = {
-    "1": "users/images/robot-kneading-dough.gif",
+    "1": "users/images/dog.gif",
     "2": "users/images/i-have-to-pee-pee.gif",
     "3": "users/images/IMG_4220.JPG",
     "4": "users/images/images-4.jpeg",
